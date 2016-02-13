@@ -11,9 +11,6 @@ session_start();
 $path = realpath($_SESSION['path']);
 $file = $_GET['file'];
 
-// REMOVE THIS
-$path = '/home/abhinav';
-
 $file = $path . '/' . $file;
 
 if (file_exists($file) && is_file($file)) {
