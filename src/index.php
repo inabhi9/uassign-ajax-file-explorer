@@ -2,8 +2,9 @@
 include_once __DIR__ . '/autoload.php';
 
 $route = Helper::getVar('route');
-if (empty($route))
+if (empty($route)) {
     $route = 'home';
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +24,8 @@ if (empty($route))
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="assets/css/jqAjaxBrowser.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../assets/css/jqAjaxBrowser.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -53,15 +54,15 @@ if (empty($route))
         <h3 class="text-muted"><a href="index.php">Ajax File Explorer</a></h3>
     </div>
 
-    <div class="container">
-        <?php if (isset($_GET['error'])): ?>
-            <div class="alert alert-danger" role="alert">
-                <strong>Error!</strong> <?= htmlentities($_GET['error']) ?>
-            </div>
-        <?php endif ?>
 
-        <?php include __DIR__ . "/scripts/{$route}.php" ?>
-    </div>
+    <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger" role="alert">
+            <strong>Error!</strong> <?= htmlentities($_GET['error']) ?>
+        </div>
+    <?php endif ?>
+
+    <?php include __DIR__ . "/scripts/{$route}.php" ?>
+
 
     <footer class="footer">
         <p>&copy; 2015 Abhinav</p>
