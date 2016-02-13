@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__ . '/../autoload.php';
 /**
  * Created by IntelliJ IDEA.
  * User: abhinav
@@ -61,6 +61,23 @@ class Helper {
                 }
             }
         );
+    }
+
+    static function showError($message) {
+        header('Location: /index.php?error=' . $message);
+        exit;
+    }
+
+    static function getVar($variable) {
+        return self::arrayVar($_GET, $variable);
+    }
+
+    static function arrayVar($array, $variable) {
+        return isset($array[$variable]) && !empty($array[$variable]) ? $array[$variable] : null;
+    }
+
+    static function postVar($variable) {
+        return self::arrayVar($_POST, $variable);
     }
 
 }
