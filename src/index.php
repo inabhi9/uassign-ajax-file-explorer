@@ -48,7 +48,12 @@ if (empty($route)) {
                     class="<?= $route == 'browser' ? 'active' : '' ?>">
                     <a href="index.php?route=browser">Browser</a>
                 </li>
-                <li role="presentation"><a href="#">Repo</a></li>
+                <li role="presentation">
+                    <a href="https://bitbucket.org/inabhi9/uassign-ajax-file-explorer"
+                       target="_blank">
+                        Git Repo
+                    </a>
+                </li>
             </ul>
         </nav>
         <h3 class="text-muted"><a href="index.php">Ajax File Explorer</a></h3>
