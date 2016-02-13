@@ -17,10 +17,12 @@ class Helper {
         $scannedDirectory = array_diff(scandir($directory), ['..', '.']);
 
         foreach ($scannedDirectory as $item) {
-            if ($showHiddenFile == false && strpos($item, '.') !== false) {
+            // Skip hidden file is user not asked
+            if ($showHiddenFile == false && strpos($item, '.') === 0) {
                 continue;
             }
 
+            // absolute dir/file path
             $itemPath = $directory . '/' . $item;
             $type = is_dir($itemPath) ? 'dir' : 'file';
             $stats = stat($itemPath);
@@ -30,15 +32,13 @@ class Helper {
                 'name' => $item,
                 'type' => $type,
                 'size' => $type == 'dir' ? '--' : $size,
-                'lastModified' => date('F jS, Y \a\t', $stats['mtime']),
+                'lastModified' => date('F jS, Y \a\t h:m a', $stats['mtime']),
                 'relativePath' => "{$relativePath}/{$item}"
             ];
             $response[] = $data;
         }
 
-        if ($sortDirFirst == true) {
-            self::sortDirFirst($response);
-        }
+        if ($sortDirFirst == true) self::sortDirFirst($response);
 
         return $response;
     }
