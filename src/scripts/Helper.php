@@ -45,6 +45,7 @@ class Helper {
 
     static function human_filesize($size, $precision = 2) {
         for ($i = 0; ($size / 1024) > 0.9; $i++, $size /= 1024) {
+            ;
         }
 
         return round($size, $precision) . ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'][$i];
@@ -78,6 +79,12 @@ class Helper {
 
     static function postVar($variable) {
         return self::arrayVar($_POST, $variable);
+    }
+
+    static function echoJson($arr) {
+        header('Content-Type: application/json');
+        echo json_encode($arr);
+        exit;
     }
 
 }

@@ -17,6 +17,4 @@ $relativePath = Helper::getVar('path');
 // absolute directory path
 $directory = $path . $relativePath;
 
-header('Content-Type: application/json');
-
-echo json_encode(Helper::scanDir($directory, $relativePath, $showHiddenFile, $sortDirFirst));
+Helper::echoJson(Helper::scanDir($directory, $relativePath, $showHiddenFile, $sortDirFirst));
