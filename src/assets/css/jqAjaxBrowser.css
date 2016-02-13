@@ -1,0 +1,66 @@
+/**
+ * Created by abhinav on 13/2/16.
+ */
+
+.ajaxBrowser ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/** Directory li style **/
+.ajaxBrowser li.dir i.icon {
+    background: url("../../assets/images/folder.png") no-repeat;
+    display: inline-block;
+    height: 17px;
+    width: 20px;
+    vertical-align: top;
+}
+
+.ajaxBrowser li i.status {
+    display: inline-block;
+    height: 17px;
+    width: 16px;
+    vertical-align: top;
+}
+
+.ajaxBrowser li.dir i.status.icon-close {
+    background: url("../../assets/images/arrow-right.png") no-repeat;
+}
+
+.ajaxBrowser li.dir i.status.icon-open {
+    background: url("../../assets/images/arrow-down.png") no-repeat;
+}
+
+.ajaxBrowser li.dir i.status.loading {
+    background: url("../../assets/images/ajax-loader.gif") no-repeat;
+    background-size: 16px;
+}
+
+.ajaxBrowser li.dir div.item {
+    cursor: pointer;
+}
+
+/** File li style **/
+.ajaxBrowser li.file i.icon {
+    background: url("../../assets/images/file.png") no-repeat center;
+    display: inline-block;
+    height: 17px;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.ajaxBrowser li.file {
+    cursor: default;
+}
+
+/** Date modified column **/
+.ajaxBrowser div.date-modified {
+    color: #969DA6;
+    font-size: 13px;
+}
+
+.ajaxBrowser div.size {
+    color: #969DA6;
+    font-size: 13px;
+    text-align: right;
+}

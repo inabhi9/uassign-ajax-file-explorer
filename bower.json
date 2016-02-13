@@ -1,0 +1,23 @@
+{
+  "name": "ajax-file-browser",
+  "authors": [
+    "Abhinav <in.abhi9@gmail.com>"
+  ],
+  "description": "Ajax based file browser and downloader",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.0"
+  }
+}
