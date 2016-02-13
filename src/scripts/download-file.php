@@ -5,11 +5,13 @@
  * Date: 13/2/16
  * Time: 6:44 PM
  */
+include_once __DIR__ . '/../autoload.php';
 
-session_start();
+(new Session())->validateOrRedirect();
+
 // Base path
 $path = realpath($_SESSION['path']);
-$file = $_GET['file'];
+$file = Helper::getVar('file');
 
 $file = $path . '/' . $file;
 
@@ -26,4 +28,6 @@ if (file_exists($file) && is_file($file)) {
     flush();
     readfile($file);
     exit;
+} else {
+    Helper::showError('Invalid file');
 }
