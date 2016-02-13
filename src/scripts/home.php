@@ -1,14 +1,34 @@
 <div class="jumbotron">
     <h1>Ajax File Explorer</h1>
 
-    <form action="index.php?route=browser" method="post">
-        <p class="lead"> Enter the directory to browse </p>
+    <p class="lead"> Intuitive ajax based directory browser and file downloader </p>
+
+    <form class="form-inline" action="index.php?route=browser" method="post">
 
         <div class="lead">
+            <div class="form-group">
+                <label class="sr-only" for="path">Directory path</label>
+                <input type="text"
+                       class="form-control"
+                       id="path"
+                       placeholder="Directory path"
+                       name="path"
+                       style="width: 400px">
+            </div>
+            <div class="checkbox" style="padding-left: 10px">
+                <label>
+                    <input type="checkbox" name="showHiddenFile"> Show hidden files
+                </label>
+            </div>
 
-            <input class="form-control" name="path">
+            <div class="checkbox" style="padding-left: 10px">
+                <label>
+                    <input type="checkbox" name="sortDirFirst" checked> Sort directory first
+                </label>
+            </div>
 
         </div>
+
         <p>
             <button
                 class="btn btn-lg btn-success"

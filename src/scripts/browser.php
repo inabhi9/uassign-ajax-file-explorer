@@ -1,7 +1,17 @@
 <?php
 session_start();
 
-$_SESSION['path'] = $_POST['path'];
+if (isset($_POST['path']) && !empty($_POST['path'])) {
+    $path = $_POST['path'];
+    if (!file_exists($path) || !is_dir($path)) {
+        header('Location: index.php?error=Invalid path');
+        exit;
+    }
+
+    $_SESSION['path'] = $_POST['path'];
+    $_SESSION['showHiddenFile'] = $_POST['showHiddenFile'] == 'on';
+    $_SESSION['sortDirFirst'] = $_POST['sortDirFirst'] == 'on';
+}
 ?>
 
 <h5>Browsing <input class="form-control"/></h5>

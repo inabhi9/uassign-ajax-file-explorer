@@ -39,12 +39,18 @@ if (empty($route)) {
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
+                <li role="presentation"
+                    class="<?= $route == 'home' ? 'active' : '' ?>">
+                    <a href="index.php">Home</a>
+                </li>
+                <li role="presentation"
+                    class="<?= $route == 'browser' ? 'active' : '' ?>">
+                    <a href="index.php?route=browser">Browser</a>
+                </li>
+                <li role="presentation"><a href="#">Repo</a></li>
             </ul>
         </nav>
-        <h3 class="text-muted">Ajax File Explorer</h3>
+        <h3 class="text-muted"><a href="index.php">Ajax File Explorer</a></h3>
     </div>
 
     <div class="container">
@@ -52,7 +58,7 @@ if (empty($route)) {
     </div>
 
     <footer class="footer">
-        <p>&copy; 2015 Company, Inc.</p>
+        <p>&copy; 2015 Abhinav</p>
     </footer>
 
 </div>
