@@ -5,15 +5,15 @@
  * Date: 13/2/16
  * Time: 1:10 PM
  */
-require_once __DIR__ . '/helper.php';
+include_once __DIR__ . '/../autoload.php';
+(new Session())->validateOrRedirect();
 
-session_start();
 // Base path
 $path = realpath($_SESSION['path']);
 $sortDirFirst = $_SESSION['sortDirFirst'];
 $showHiddenFile = $_SESSION['showHiddenFile'];
 // relative path to base path
-$relativePath = $_GET['path'];
+$relativePath = Helper::getVar('path');
 // absolute directory path
 $directory = $path . $relativePath;
 
