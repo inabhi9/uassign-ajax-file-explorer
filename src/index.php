@@ -1,9 +1,9 @@
 <?php
-$route = $_GET['route'];
+include_once __DIR__ . '/autoload.php';
 
-if (empty($route)) {
+$route = Helper::getVar('route');
+if (empty($route))
     $route = 'home';
-}
 ?>
 
 <!DOCTYPE html>
@@ -15,16 +15,16 @@ if (empty($route)) {
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
-    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <title>Ajax File Browser</title>
 
     <!-- Bootstrap -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../assets/css/jqAjaxBrowser.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/jqAjaxBrowser.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -54,7 +54,13 @@ if (empty($route)) {
     </div>
 
     <div class="container">
-        <?php include "scripts/{$route}.php" ?>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> <?= htmlentities($_GET['error']) ?>
+            </div>
+        <?php endif ?>
+
+        <?php include __DIR__ . "/scripts/{$route}.php" ?>
     </div>
 
     <footer class="footer">
@@ -64,8 +70,8 @@ if (empty($route)) {
 </div>
 <!-- /container -->
 
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../assets/js/jqAjaxBrowser.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="assets/js/jqAjaxBrowser.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
