@@ -73,8 +73,8 @@ class Helper {
         return self::arrayVar($_GET, $variable);
     }
 
-    static function arrayVar($array, $variable) {
-        return isset($array[$variable]) && !empty($array[$variable]) ? $array[$variable] : null;
+    static function arrayVar($array, $variable, $default = null) {
+        return isset($array[$variable]) && !empty($array[$variable]) ? $array[$variable] : $default;
     }
 
     static function postVar($variable) {

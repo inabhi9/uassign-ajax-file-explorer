@@ -1,3 +1,11 @@
+<?php
+include_once __DIR__ . '/../autoload.php';
+(new Session());
+
+$path = Helper::arrayVar($_SESSION, 'path', '/');
+?>
+
+
 <div class="jumbotron">
     <h1>Ajax File Explorer</h1>
 
@@ -13,6 +21,7 @@
                        id="path"
                        placeholder="Directory path"
                        name="path"
+                       value="<?= $path ?>"
                        style="width: 400px">
             </div>
             <div class="checkbox" style="padding-left: 10px">
