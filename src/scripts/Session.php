@@ -7,11 +7,17 @@
  */
 include_once __DIR__ . '/../autoload.php';
 
+/**
+ * Class Session Starts session and has some helper method
+ */
 class Session {
     function __construct() {
         session_start();
     }
 
+    /**
+     * Validates session variable's path key. If it's not validate Helper::showError() is called.
+     */
     function validateOrRedirect() {
         if (!isset($_SESSION['path'])) {
             Helper::showError('Invalid Path');
@@ -24,6 +30,9 @@ class Session {
         }
     }
 
+    /**
+     * Sets application specific $_SESSION variables from $_POST
+     */
     function setConfig() {
         $path = Helper::postVar('path');
         if ($path !== null) {
