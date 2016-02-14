@@ -3,6 +3,7 @@ include_once __DIR__ . '/../autoload.php';
 (new Session())->setConfig();
 ?>
 
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">Path:
@@ -26,3 +27,14 @@ include_once __DIR__ . '/../autoload.php';
         <div id="ajaxBrowser"></div>
     </div>
 </div>
+
+<strong class="text-muted">Usage Tips:</strong>
+<p class="text-muted">
+    <span>Double click on file to download.</span>
+
+    <br/>
+
+    <span>
+        Double click on directory or Single click on the arrow to expand/collapse directory.
+    </span>
+</p>
