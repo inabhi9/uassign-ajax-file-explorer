@@ -13,7 +13,7 @@ $path = realpath($_SESSION['path']);
 $sortDirFirst = $_SESSION['sortDirFirst'];
 $showHiddenFile = $_SESSION['showHiddenFile'];
 // relative path to base path
-$relativePath = Helper::getVar('path');
+$relativePath = Helper::cleanPath(Helper::getVar('path'));
 // absolute directory path
 $directory = $path . $relativePath;
 

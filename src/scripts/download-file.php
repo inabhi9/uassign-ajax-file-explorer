@@ -11,8 +11,7 @@ include_once __DIR__ . '/../autoload.php';
 
 // Base path
 $path = realpath($_SESSION['path']);
-$file = Helper::getVar('file');
-
+$file = Helper::cleanPath(Helper::getVar('file'));
 $file = $path . '/' . $file;
 
 if (file_exists($file) && is_file($file)) {

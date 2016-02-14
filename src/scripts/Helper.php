@@ -54,7 +54,9 @@ class Helper {
             $response[] = $data;
         }
 
-        if ($sortDirFirst == true) self::sortDirFirst($response);
+        if ($sortDirFirst == true) {
+            self::sortDirFirst($response);
+        }
 
         return $response;
     }
@@ -145,6 +147,16 @@ class Helper {
         header('Content-Type: application/json');
         echo json_encode($arr);
         exit;
+    }
+
+    /**
+     * Removes dots and slashes from given string
+     *
+     * @param string $path To be cleaned
+     * @return string Cleaned
+     */
+    static function cleanPath($path) {
+        return "/" . ltrim($path, "/.");
     }
 
 }
