@@ -41,14 +41,13 @@ class Helper {
             // absolute dir/file path
             $itemPath = $directory . '/' . $item;
             $type = is_dir($itemPath) ? 'dir' : 'file';
-            $stats = stat($itemPath);
-            $size = self::human_filesize($stats['size']);
+            $stats = self::getFileStat($itemPath);
 
             $data = [
                 'name' => $item,
                 'type' => $type,
-                'size' => $type == 'dir' ? '--' : $size,
-                'lastModified' => date('F jS, Y \a\t h:m a', $stats['mtime']),
+                'size'         => $type == 'dir' ? '--' : $stats['size'],
+                'lastModified' => $stats['modified'],
                 'relativePath' => "{$relativePath}/{$item}"
             ];
             $response[] = $data;
@@ -61,6 +60,18 @@ class Helper {
         return $response;
     }
 
+    private static function getFileStat($file) {
+        $resp = ['size' => 'error', 'modified' => 'error'];
+        try {
+            $stats = stat($file);
+            $resp['size'] = self::humanFileSize($stats['size']);
+            $resp['modified'] = date('F jS, Y \a\t h:m a', $stats['mtime']);
+        } finally {
+            return $resp;
+        }
+
+    }
+
     /**
      * Converts gives file size to human readable form. ie to 1024 bytes to 1kb
      *
@@ -68,7 +79,7 @@ class Helper {
      * @param int $precision Precision to be kept. Default is 2
      * @return string Human readable file size
      */
-    static function human_filesize($size, $precision = 2) {
+    static function humanFileSize($size, $precision = 2) {
         for ($i = 0; ($size / 1024) > 0.9; $i++, $size /= 1024) {
             ;
         }
@@ -139,6 +150,21 @@ class Helper {
     }
 
     /**
+     * Removes dots and slashes from given string
+     *
+     * @param string $path To be cleaned
+     * @return string Cleaned
+     */
+    static function cleanPath($path) {
+        return "/" . ltrim($path, "/.");
+    }
+
+    static function throwAjaxError($message) {
+        http_response_code(400);
+        self::echoJson(['error' => $message]);
+    }
+
+    /**
      * Echo given array into json and exits. This also set the proper header
      *
      * @param array $arr
@@ -147,16 +173,6 @@ class Helper {
         header('Content-Type: application/json');
         echo json_encode($arr);
         exit;
-    }
-
-    /**
-     * Removes dots and slashes from given string
-     *
-     * @param string $path To be cleaned
-     * @return string Cleaned
-     */
-    static function cleanPath($path) {
-        return "/" . ltrim($path, "/.");
     }
 
 }
