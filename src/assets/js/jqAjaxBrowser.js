@@ -1,4 +1,6 @@
 /**
+ * jQuery plugin that builds ajax based file explorer
+ *
  * Created by abhinav on 13/2/16.
  */
 
@@ -10,7 +12,6 @@
 
     $.fn.ajaxBrowser = function (options) {
         var parent = this;
-        var $parent = $(this);
         var defaultOptions = {
             url: null
         };
@@ -18,11 +19,13 @@
 
         function init() {
             // Adding class to identify the application
-            parent.addClass('ajaxBrowser dir');
+            parent.addClass('ajaxBrowser dir initiating');
             // Triggering initial directory
-            parent.node().toggle();
+            parent.node().open().then(function () {
+                parent.removeClass('initiating')
+            });
             // Preventing text selection on double click
-            $parent.mousedown(function (e) {
+            parent.mousedown(function (e) {
                 e.preventDefault();
             });
         }
@@ -37,11 +40,7 @@
 
             var api = {
                 toggle  : function () {
-                    if ($node.data('isOpen') == true) {
-                        $node.close();
-                    } else {
-                        $node.open();
-                    }
+                    return $node.data('isOpen') == true ? $node.close() : $node.open();
                 },
                 open    : function () {
                     if ($node.data('isOpen') == true) return;
@@ -50,21 +49,18 @@
 
                     console.log(_v, 'Opening tree');
                     var newLevel = parentLevel + 1;
-                    var newElement = getNewTree(newLevel);
+                    var newTree = getNewTree(newLevel);
                     var path = $node.data('path');
 
                     console.log(_v, 'Parent: level', parentLevel, newLevel);
-                    //console.log(_v, 'path', );
+
                     $node._setIcon('loading');
 
-                    $.get(options.url, {path: path})
+                    var differed = $.get(options.url, {path: path})
                         .done(function (resp) {
                             console.log(_v, 'Response', resp);
                             resp.forEach(function (obj) {
-                                if (obj.type == 'file')
-                                    newElement.append(getFileTemplate(obj, newLevel));
-                                else
-                                    newElement.append(getDirTemplate(obj, newLevel));
+                                newTree.append(itemTemplate(obj, newLevel));
                             });
                         })
                         // Setting icon and mark as open
@@ -78,7 +74,9 @@
                             $node._setIcon('icon-close');
                         });
 
-                    $node.append(newElement);
+                    $node.append(newTree);
+
+                    return differed;
 
                 },
                 close   : function () {
@@ -125,35 +123,21 @@
 
         $(document).on('click', '.ajaxBrowser .item', function (e) {
             markOddEven();
-            $(this).css('background-color', '#d9d7f7');
+            $(this).css('background-color', '#E3E4E5');
         });
 
-        function getDirTemplate(obj, level) {
-            return $('<li></li>')
-                .addClass('node dir')
-                .data('path', obj.relativePath)
-                .append($('<div class="title item row"></div>')
-                    .append($('<div class="col-md-7"></div>')
-                        .css('padding-left', parseInt(level) * 20)
-                        .append('<i class="status icon-close"></i> <i class="icon"></i> ' + obj.name)
-                )
-                    .append($('<div class="col-md-3 date-modified"></div>')
-                        .append(obj.lastModified)
-                )
-                    .append($('<div class="col-md-2 size"></div>')
-                        .append(obj.size)
-                )
-            );
-        }
+        function itemTemplate(obj, level) {
+            var iconCls = '';
+            if (obj.type == 'dir') iconCls = ' icon-close';
 
-        function getFileTemplate(obj, level) {
-            return $('<li></li>')
+            return $('<li class="node"></li>')
+                .addClass(obj.type)
                 .data('path', obj.relativePath)
-                .addClass('node file')
                 .append($('<div class="title item row"></div>')
                     .append($('<div class="col-md-7"></div>')
                         .css('padding-left', parseInt(level) * 20)
-                        .append('<i class="status"></i> <i class="icon"></i> ' + obj.name)
+                        .append('<i class="status ' + iconCls + '"></i>')
+                        .append('<i class="icon"></i> ' + obj.name)
                 )
                     .append($('<div class="col-md-3 date-modified"></div>')
                         .append(obj.lastModified)

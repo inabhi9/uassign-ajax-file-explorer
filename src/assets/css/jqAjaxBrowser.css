@@ -7,6 +7,14 @@
     padding: 0;
 }
 
+/** Loading indicator while initiating **/
+.ajaxBrowser.initiating {
+    height: 400px;
+    background: url("../../assets/images/ajax-loader.gif") no-repeat center;
+    padding-top: 35px;
+    display: block;
+}
+
 /** Directory li style **/
 .ajaxBrowser li.dir i.icon {
     background: url("../../assets/images/folder.png") no-repeat;
