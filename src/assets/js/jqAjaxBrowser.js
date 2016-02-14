@@ -70,7 +70,11 @@
                             markOddEven();
                         })
                         // If failed
-                        .fail(function () {
+                        .fail(function (resp) {
+                            console.log(_v, 'Error', resp);
+                            var msg = (resp.responseJSON || {}).error ||
+                                'Unexpected error occurred';
+                            $.notify(msg, 'error');
                             $node._setIcon('icon-close');
                         });
 
