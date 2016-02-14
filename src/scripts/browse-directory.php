@@ -17,4 +17,10 @@ $relativePath = Helper::cleanPath(Helper::getVar('path'));
 // absolute directory path
 $directory = $path . $relativePath;
 
-Helper::echoJson(Helper::scanDir($directory, $relativePath, $showHiddenFile, $sortDirFirst));
+try {
+    $scannedDir = Helper::scanDir($directory, $relativePath, $showHiddenFile, $sortDirFirst);
+    Helper::echoJson($scannedDir);
+} catch (Exception $ex) {
+    Helper::throwAjaxError($ex->getMessage());
+}
+
