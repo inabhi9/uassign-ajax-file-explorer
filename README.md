@@ -22,11 +22,11 @@ similar with the OS X Finder.
 * Install bower on targeted machine and install bower dependency using following command in code 
 root directory
  
-    bower install
+        bower install
 
 * To start application using PHP's builtin web server run
 
-    php -S 0.0.0.0:8080 -t src
+        php -S 0.0.0.0:8080 -t src
     
 Or if you want to deploy it using Aapache/Nginx
 
